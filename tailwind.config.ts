@@ -1,0 +1,50 @@
+import type { Config } from "tailwindcss";
+export default {
+  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        bg: "var(--bg)",
+        "bg-warm": "var(--bg-warm)",
+        card: "var(--card)",
+        "card-hover": "var(--card-hover)",
+        ink: "var(--ink)",
+        "ink-secondary": "var(--ink-secondary)",
+        mute: "var(--mute)",
+        line: "var(--line)",
+        "line-subtle": "var(--line-subtle)",
+        navy: "var(--navy)",
+        "navy-light": "var(--navy-light)",
+        "navy-dark": "var(--navy-dark)",
+        saffron: "var(--saffron)",
+        "saffron-light": "var(--saffron-light)",
+        "saffron-dark": "var(--saffron-dark)",
+        leaf: "var(--leaf)",
+        "leaf-light": "var(--leaf-light)",
+        "leaf-dark": "var(--leaf-dark)",
+        info: "var(--info)",
+        warning: "var(--warning)",
+        danger: "var(--danger)",
+        success: "var(--success)",
+      },
+      fontFamily: {
+        sans: ["Inter", "Geist", "system-ui", "sans-serif"],
+      },
+      borderRadius: {
+        sm: "var(--radius-sm)",
+        DEFAULT: "var(--radius)",
+        md: "var(--radius-md)",
+        lg: "var(--radius-lg)",
+        xl: "var(--radius-xl)",
+      },
+      boxShadow: {
+        sm: "var(--shadow-sm)",
+        DEFAULT: "var(--shadow)",
+        md: "var(--shadow-md)",
+        lg: "var(--shadow-lg)",
+        xl: "var(--shadow-xl)",
+      },
+    },
+  },
+  plugins: [],
+} satisfies Config;
