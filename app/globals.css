@@ -443,9 +443,9 @@ h3 { font-size: clamp(1.1rem, 2vw + 0.4rem, 1.35rem); }
 .section-lg { padding: 3.5rem 0; }
 @media (min-width: 640px) { .section-lg { padding: 4.5rem 0; } }
 @media (min-width: 768px) { .section-lg { padding: 6.5rem 0; } }
-.container-main { max-width: 1280px; margin: 0 auto; padding: 0 1rem; width: 100%; box-sizing: border-box; }
-@media (min-width: 640px) { .container-main { padding: 0 1.5rem; } }
-@media (min-width: 1024px) { .container-main { padding: 0 2rem; } }
+.container-main { max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; width: 100%; box-sizing: border-box; }
+@media (min-width: 640px) { .container-main { padding-left: 1.5rem; padding-right: 1.5rem; } }
+@media (min-width: 1024px) { .container-main { padding-left: 2rem; padding-right: 2rem; } }
 
 /* Hide scrollbar */
 .scrollbar-none {

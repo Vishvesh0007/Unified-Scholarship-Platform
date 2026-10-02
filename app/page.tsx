@@ -325,8 +325,8 @@ export default function Home() {
       </section>
 
       {/* ═══ Public Marketing Footer ═══ */}
-      <footer className="border-t border-line bg-white">
-        <div className="container-main py-10 sm:py-16">
+      <footer className="border-t border-line bg-white pt-12 pb-12 sm:pt-16 sm:pb-16">
+        <div className="container-main">
           <div className="grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             {/* Brand column */}
             <div className="md:col-span-2">
