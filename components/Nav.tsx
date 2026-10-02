@@ -60,12 +60,15 @@ export default function Nav() {
       {/* National Emblem & Team identifier bar */}
       <div className="emblem-bar">
         <div className="container-main flex items-center justify-between text-[11px] sm:text-xs">
-          <div className="flex items-center gap-2">
-            <span className="text-sm">🏛️</span>
-            <span className="font-medium">Unified Scholarship Platform for Tribal Students</span>
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <span className="text-sm shrink-0">🏛️</span>
+            <span className="font-medium truncate">
+              <span className="hidden sm:inline">Unified Scholarship Platform for Tribal Students</span>
+              <span className="sm:hidden">Unified Scholarship Platform</span>
+            </span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-white/80 hidden sm:inline">Prototype by <strong className="text-saffron-light font-semibold">Team Vecood</strong></span>
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-2">
+            <span className="text-white/80 hidden md:inline">Prototype by <strong className="text-saffron-light font-semibold">Team Vecood</strong></span>
             <span className="bg-white/10 text-white/90 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider">SIH 2026</span>
           </div>
         </div>
@@ -76,18 +79,18 @@ export default function Nav() {
         className={`sticky top-0 z-50 transition-all duration-200 ${
           isPortalPage || scrolled
             ? "border-b border-line bg-white/95 backdrop-blur-md shadow-xs"
-            : "bg-white/70 backdrop-blur-sm border-b border-line/40"
+            : "bg-white/80 backdrop-blur-sm border-b border-line/40"
         }`}
       >
-        <div className="container-main flex h-16 items-center justify-between">
+        <div className="container-main flex h-16 items-center justify-between gap-2">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy text-white text-sm font-bold shadow-xs group-hover:bg-navy-light transition-colors">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
+            <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-white text-xs sm:text-sm font-bold shadow-xs group-hover:bg-navy-light transition-colors">
               USP
             </div>
-            <div>
-              <p className="text-sm font-bold text-ink leading-tight tracking-tight">Unified Scholarship Platform</p>
-              <p className="text-[11px] text-mute leading-tight">Ministry of Tribal Affairs & Connected Portals</p>
+            <div className="min-w-0">
+              <p className="text-xs sm:text-sm font-bold text-ink leading-tight tracking-tight truncate">Unified Scholarship Platform</p>
+              <p className="text-[10px] sm:text-[11px] text-mute leading-tight truncate hidden sm:block">Ministry of Tribal Affairs & Connected Portals</p>
             </div>
           </Link>
 
@@ -157,17 +160,17 @@ export default function Nav() {
           </div>
 
           {/* CTA & Status */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2 shrink-0">
             {/* Quick portal login button */}
             {!isPortalPage ? (
               <Link
                 href="/student"
-                className="btn btn-primary text-sm px-4 py-2"
+                className="hidden sm:inline-flex btn btn-primary text-xs sm:text-sm px-3.5 sm:px-4 py-2 shadow-xs"
               >
                 Student Portal
               </Link>
             ) : (
-              <div className="hidden sm:flex items-center gap-1.5 text-xs text-mute bg-bg-warm border border-line px-3 py-1.5 rounded-lg">
+              <div className="hidden sm:flex items-center gap-1.5 text-xs text-mute bg-bg-warm border border-line px-2.5 sm:px-3 py-1.5 rounded-lg">
                 <span className="status-dot active"></span>
                 <span>Live Mode</span>
               </div>
@@ -175,7 +178,7 @@ export default function Nav() {
 
             {/* Mobile menu toggle */}
             <button
-              className="lg:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-line hover:bg-card-hover transition-colors"
+              className="lg:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-line hover:bg-card-hover transition-colors shrink-0"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -186,66 +189,117 @@ export default function Nav() {
 
         {/* Mobile dropdown menu */}
         {mobileOpen && (
-          <div className="lg:hidden border-t border-line bg-white shadow-lg animate-fade-in">
-            <div className="container-main py-4 space-y-2">
+          <div className="lg:hidden border-t border-line bg-white shadow-xl animate-fade-in max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <div className="container-main py-4 space-y-3">
               <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-mute">Navigation</p>
-              <Link
-                href="/"
-                className="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-bg-warm"
-                onClick={() => setMobileOpen(false)}
-              >
-                Home
-              </Link>
-              <Link
-                href="/#how-it-works"
-                className="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-bg-warm"
-                onClick={() => setMobileOpen(false)}
-              >
-                How It Works
-              </Link>
-              <Link
-                href="/#schemes"
-                className="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-bg-warm"
-                onClick={() => setMobileOpen(false)}
-              >
-                Supported Schemes
-              </Link>
-
-              <div className="pt-2 border-t border-line space-y-1">
-                <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-mute">Access Portals</p>
+              <div className="grid grid-cols-3 gap-1 px-1">
                 <Link
-                  href="/student"
-                  className="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-bg-warm text-navy font-semibold"
+                  href="/"
+                  className="px-3 py-2 text-center text-xs font-semibold rounded-lg bg-bg-warm hover:bg-line transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
-                  🎓 Student Portal
+                  Home
                 </Link>
                 <Link
-                  href="/institute"
-                  className="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-bg-warm"
+                  href="/#how-it-works"
+                  className="px-3 py-2 text-center text-xs font-semibold rounded-lg bg-bg-warm hover:bg-line transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
-                  🏫 Institute Portal
+                  How It Works
                 </Link>
                 <Link
-                  href="/district"
-                  className="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-bg-warm"
+                  href="/#schemes"
+                  className="px-3 py-2 text-center text-xs font-semibold rounded-lg bg-bg-warm hover:bg-line transition-colors"
                   onClick={() => setMobileOpen(false)}
                 >
-                  🛡️ District Dashboard
-                </Link>
-                <Link
-                  href="/ministry"
-                  className="block px-3 py-2 text-sm font-medium rounded-lg hover:bg-bg-warm"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  🏛️ Ministry Dashboard
+                  Schemes
                 </Link>
               </div>
 
-              <div className="pt-3 border-t border-line flex items-center justify-between text-xs text-mute px-3">
+              <div className="pt-2 border-t border-line space-y-1.5">
+                <p className="px-3 text-[11px] font-bold uppercase tracking-wider text-mute">Access Stakeholder Portals</p>
+                <div className="grid gap-1.5 sm:grid-cols-2">
+                  <Link
+                    href="/student"
+                    className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${
+                      pathname.startsWith("/student")
+                        ? "bg-navy/10 border-navy/30 text-navy font-semibold"
+                        : "bg-white border-line hover:bg-bg-warm text-ink"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-lg">🎓</span>
+                      <div>
+                        <p className="text-xs font-bold leading-tight">Student Portal</p>
+                        <p className="text-[10px] text-mute leading-tight">Applicant & Wallet</p>
+                      </div>
+                    </div>
+                    <span className="text-xs text-navy font-semibold">Launch →</span>
+                  </Link>
+
+                  <Link
+                    href="/institute"
+                    className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${
+                      pathname.startsWith("/institute")
+                        ? "bg-navy/10 border-navy/30 text-navy font-semibold"
+                        : "bg-white border-line hover:bg-bg-warm text-ink"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-lg">🏫</span>
+                      <div>
+                        <p className="text-xs font-bold leading-tight">Institute Portal</p>
+                        <p className="text-[10px] text-mute leading-tight">Verification & Exceptions</p>
+                      </div>
+                    </div>
+                    <span className="text-xs text-navy font-semibold">Launch →</span>
+                  </Link>
+
+                  <Link
+                    href="/district"
+                    className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${
+                      pathname.startsWith("/district")
+                        ? "bg-navy/10 border-navy/30 text-navy font-semibold"
+                        : "bg-white border-line hover:bg-bg-warm text-ink"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-lg">🛡️</span>
+                      <div>
+                        <p className="text-xs font-bold leading-tight">District Dashboard</p>
+                        <p className="text-[10px] text-mute leading-tight">Analytics & Bottlenecks</p>
+                      </div>
+                    </div>
+                    <span className="text-xs text-navy font-semibold">Launch →</span>
+                  </Link>
+
+                  <Link
+                    href="/ministry"
+                    className={`flex items-center justify-between p-3 rounded-xl border transition-colors ${
+                      pathname.startsWith("/ministry")
+                        ? "bg-navy/10 border-navy/30 text-navy font-semibold"
+                        : "bg-white border-line hover:bg-bg-warm text-ink"
+                    }`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-lg">🏛️</span>
+                      <div>
+                        <p className="text-xs font-bold leading-tight">Ministry Dashboard</p>
+                        <p className="text-[10px] text-mute leading-tight">National Oversight</p>
+                      </div>
+                    </div>
+                    <span className="text-xs text-navy font-semibold">Launch →</span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-line flex items-center justify-between text-xs text-mute px-1">
                 <span>Team Vecood · SIH 2026</span>
-                <span className="badge badge-navy">v1.0 Live</span>
+                <span className="badge badge-navy text-[10px]">v1.0 Live</span>
               </div>
             </div>
           </div>

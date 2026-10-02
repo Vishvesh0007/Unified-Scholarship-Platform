@@ -105,59 +105,34 @@ export default function StudentPortal() {
         </div>
       }
     >
-      {/* ═══ Tab Navigation Pills ═══ */}
-      <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-        {sidebarLinks.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as TabId)}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              activeTab === tab.id
-                ? "bg-navy text-white shadow-xs"
-                : "bg-white border border-line text-mute hover:border-navy/30 hover:text-ink hover:bg-card-hover"
-            }`}
-          >
-            <tab.icon size={15} />
-            <span>{tab.label}</span>
-            {tab.badge && (
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                activeTab === tab.id ? "bg-white/20 text-white" : "bg-bg-warm text-mute"
-              }`}>
-                {tab.badge}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
-
       {/* ═══════════════════════════════════════════════
           DASHBOARD TAB
           ═══════════════════════════════════════════════ */}
       {activeTab === "dashboard" && (
-        <div className="space-y-6 animate-fade-in">
+        <div className="space-y-5 sm:space-y-6 animate-fade-in">
           {/* Greeting Card */}
-          <div className="card p-6 bg-gradient-to-r from-white to-bg-warm border-line">
+          <div className="card p-4 sm:p-6 bg-gradient-to-r from-white to-bg-warm border-line">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <span className="badge badge-saffron text-[10px]">ST Beneficiary</span>
                   <span className="text-xs text-mute font-mono">UID: {studentProfile.aadhaar}</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-ink">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-ink">
                   Good morning, {studentProfile.name.split(" ")[0]} 👋
                 </h2>
-                <p className="text-sm text-mute mt-1">
+                <p className="text-xs sm:text-sm text-mute mt-1">
                   {studentProfile.institute} · {studentProfile.course} ({studentProfile.year})
                 </p>
               </div>
 
               {/* Profile Completion Bar */}
-              <div className="flex items-center gap-4 bg-white p-3.5 rounded-xl border border-line shadow-2xs">
-                <div className="text-right">
-                  <p className="text-[11px] text-mute font-medium">Profile completeness</p>
-                  <p className="text-xl font-bold text-navy">{studentProfile.profileCompletion}%</p>
+              <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 bg-white p-3 sm:p-3.5 rounded-xl border border-line shadow-2xs">
+                <div className="text-left sm:text-right">
+                  <p className="text-[10px] sm:text-[11px] text-mute font-medium">Profile completeness</p>
+                  <p className="text-lg sm:text-xl font-bold text-navy">{studentProfile.profileCompletion}%</p>
                 </div>
-                <div className="w-28 sm:w-36">
+                <div className="w-24 sm:w-36">
                   <div className="progress-bar h-2.5">
                     <div className="progress-bar-fill" style={{ width: `${studentProfile.profileCompletion}%` }} />
                   </div>
@@ -168,7 +143,7 @@ export default function StudentPortal() {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
             <StatCard label="Eligible Schemes" value="8" icon={Search} color="navy" trend={{ value: "+3 new", up: true }} />
             <StatCard label="Active Applications" value={studentApplications.length} icon={FileText} color="saffron" />
             <StatCard label="Documents Verified" value={docs.filter(d => d.status === "verified").length} icon={CheckCircle2} color="leaf" />
@@ -177,47 +152,47 @@ export default function StudentPortal() {
 
           {/* Recommended Scholarships */}
           <div>
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
               <div>
-                <h3 className="font-bold text-lg text-ink">Recommended Scholarships</h3>
+                <h3 className="font-bold text-base sm:text-lg text-ink">Recommended Scholarships</h3>
                 <p className="text-xs text-mute mt-0.5">Matched from your ST category, income, and university enrollment</p>
               </div>
               <button
                 onClick={() => setActiveTab("discover")}
-                className="btn btn-outline text-xs py-1.5 px-3 flex items-center gap-1 hover:text-navy"
+                className="btn btn-outline text-xs py-1.5 px-3 flex items-center gap-1 hover:text-navy self-start sm:self-auto cursor-pointer"
               >
                 View all schemes <ChevronRight size={14} />
               </button>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2">
               {schemes.slice(0, 4).map(s => (
-                <SpotlightCard key={s.id} className="p-5 flex flex-col justify-between">
+                <SpotlightCard key={s.id} className="p-4 sm:p-5 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h4 className="font-bold text-sm text-ink">{s.name}</h4>
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <h4 className="font-bold text-sm text-ink truncate">{s.name}</h4>
                         <p className="text-xs text-mute mt-0.5">{s.source} · {s.level}</p>
                       </div>
-                      <span className="badge badge-leaf shrink-0 font-semibold text-[11px]">92% match</span>
+                      <span className="badge badge-leaf shrink-0 font-semibold text-[10px] sm:text-[11px]">92% match</span>
                     </div>
-                    <div className="mt-4 flex items-baseline gap-2">
-                      <p className="text-2xl font-extrabold text-navy">{s.amount}</p>
+                    <div className="mt-3 sm:mt-4 flex items-baseline gap-2">
+                      <p className="text-xl sm:text-2xl font-extrabold text-navy">{s.amount}</p>
                       <span className="text-xs text-mute">/ academic year</span>
                     </div>
-                    <p className="text-xs text-mute mt-1.5">Application Deadline: <strong className="text-ink">{s.deadline}</strong></p>
+                    <p className="text-xs text-mute mt-1">Application Deadline: <strong className="text-ink">{s.deadline}</strong></p>
                   </div>
 
-                  <div className="flex gap-2 mt-5 pt-3 border-t border-line-subtle">
+                  <div className="flex flex-col xs:flex-row gap-2 mt-4 sm:mt-5 pt-3 border-t border-line-subtle">
                     <button
                       onClick={() => setActiveTab("discover")}
-                      className="btn btn-primary text-xs py-2 px-4 flex-1 font-semibold"
+                      className="btn btn-primary text-xs py-2 px-3 sm:px-4 flex-1 font-semibold justify-center"
                     >
                       Check Eligibility & Apply
                     </button>
                     <button
                       onClick={() => setActiveTab("documents")}
-                      className="btn btn-outline text-xs py-2 px-3"
+                      className="btn btn-outline text-xs py-2 px-3 justify-center"
                     >
                       Required Docs
                     </button>
@@ -226,6 +201,7 @@ export default function StudentPortal() {
               ))}
             </div>
           </div>
+
 
           {/* Application Timeline + Notifications Row */}
           <div className="grid gap-6 lg:grid-cols-2">
@@ -291,7 +267,7 @@ export default function StudentPortal() {
               </p>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-4">
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               <div>
                 <label className="input-label">Education Level</label>
                 <select value={level} onChange={e => setLevel(e.target.value)} className="input">
@@ -453,8 +429,8 @@ export default function StudentPortal() {
           </div>
 
           {studentApplications.map(app => (
-            <SpotlightCard key={app.id} className="p-6">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <SpotlightCard key={app.id} className="p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xs text-mute bg-bg-warm px-2 py-0.5 rounded border border-line">
@@ -464,18 +440,18 @@ export default function StudentPortal() {
                       {statusLabels[app.status]}
                     </span>
                   </div>
-                  <h4 className="font-bold text-base text-ink mt-2">{app.schemeName}</h4>
+                  <h4 className="font-bold text-sm sm:text-base text-ink mt-2">{app.schemeName}</h4>
                   <p className="text-xs text-mute mt-1">Submitted: {app.appliedDate} · Academic Session 2026-27</p>
                 </div>
 
-                <div className="flex items-center gap-5">
-                  <div className="md:text-right">
-                    <p className="text-xl font-extrabold text-navy">{app.amount}</p>
+                <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-5 pt-2 sm:pt-0 border-t sm:border-t-0 border-line-subtle">
+                  <div className="sm:text-right">
+                    <p className="text-lg sm:text-xl font-extrabold text-navy">{app.amount}</p>
                     <p className="text-xs text-mute">Stage: <strong className="text-ink">{app.currentStep}</strong></p>
                   </div>
                   <button
                     onClick={() => setActiveTab("timeline")}
-                    className="btn btn-outline text-xs py-2 px-3 flex items-center gap-1.5"
+                    className="btn btn-outline text-xs py-2 px-3 flex items-center gap-1.5 shrink-0"
                   >
                     <Eye size={14} /> Full Track
                   </button>
@@ -483,7 +459,7 @@ export default function StudentPortal() {
               </div>
 
               {/* Step indicator */}
-              <div className="mt-5 pt-4 border-t border-line-subtle grid grid-cols-4 gap-2">
+              <div className="mt-4 sm:mt-5 pt-3 sm:pt-4 border-t border-line-subtle grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[
                   { name: "Submission", done: true },
                   { name: "Institute Verification", done: app.status !== "submitted" },
@@ -492,7 +468,7 @@ export default function StudentPortal() {
                 ].map((s, idx) => (
                   <div key={s.name}>
                     <div className={`h-2 rounded-full ${s.done ? "bg-leaf" : "bg-line"}`} />
-                    <p className="text-[10px] text-mute mt-1 truncate">{s.name}</p>
+                    <p className="text-[10px] text-mute mt-1 truncate" title={s.name}>{s.name}</p>
                   </div>
                 ))}
               </div>

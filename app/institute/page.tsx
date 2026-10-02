@@ -55,38 +55,13 @@ export default function InstitutePortal() {
         </div>
       }
     >
-      {/* ═══ Top Tab Pills ═══ */}
-      <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-        {sidebarLinks.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as InstituteTab)}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              activeTab === tab.id
-                ? "bg-navy text-white shadow-xs"
-                : "bg-white border border-line text-mute hover:border-navy/30 hover:text-ink hover:bg-card-hover"
-            }`}
-          >
-            <tab.icon size={15} />
-            <span>{tab.label}</span>
-            {tab.badge && (
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                activeTab === tab.id ? "bg-white/20 text-white" : "bg-bg-warm text-mute"
-              }`}>
-                {tab.badge}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
-
       {/* ═══════════════════════════════════════════════
           OVERVIEW / DASHBOARD TAB
           ═══════════════════════════════════════════════ */}
       {activeTab === "overview" && (
-        <div className="space-y-6 animate-fade-in">
+        <div className="space-y-5 sm:space-y-6 animate-fade-in">
           {/* Key Stats */}
-          <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
             <StatCard label="Total Applications" value={instituteStats.totalApplications.toLocaleString()} icon={FileText} color="navy" trend={{ value: "+42 this week", up: true }} />
             <StatCard label="Pending Verification" value={instituteStats.pendingVerification} icon={AlertTriangle} color="saffron" />
             <StatCard label="Verified & Cleared" value={instituteStats.verified.toLocaleString()} icon={CheckCircle2} color="leaf" trend={{ value: `${instituteStats.approvalRate}% rate`, up: true }} />
@@ -94,16 +69,16 @@ export default function InstitutePortal() {
           </div>
 
           {/* Quick Action Grid */}
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="lg:col-span-2 card p-6">
-              <div className="flex items-center justify-between mb-4">
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
+            <div className="lg:col-span-2 card p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                 <div>
                   <h3 className="font-bold text-base text-ink">Urgent Verification Batch</h3>
                   <p className="text-xs text-mute mt-0.5">High priority tribal students with upcoming portal closing dates</p>
                 </div>
                 <button
                   onClick={() => setActiveTab("queue")}
-                  className="text-xs text-navy font-semibold hover:underline flex items-center gap-1"
+                  className="text-xs text-navy font-semibold hover:underline flex items-center gap-1 self-start sm:self-auto cursor-pointer"
                 >
                   View full queue ({verificationQueue.length}) →
                 </button>
@@ -203,20 +178,20 @@ export default function InstitutePortal() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="relative">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto">
+                <div className="relative flex-1 sm:w-56">
                   <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-mute" />
                   <input
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
                     placeholder="Search by student or ID..."
-                    className="input !pl-8 !py-1.5 !text-xs w-48 sm:w-56"
+                    className="input !pl-8 !py-1.5 !text-xs w-full"
                   />
                 </div>
                 <select
                   value={filterStatus}
                   onChange={e => setFilterStatus(e.target.value)}
-                  className="input !py-1.5 !text-xs w-36"
+                  className="input !py-1.5 !text-xs w-full sm:w-36"
                 >
                   <option value="all">All Statuses</option>
                   <option value="VERIFIED">Verified</option>
@@ -225,6 +200,10 @@ export default function InstitutePortal() {
                 </select>
               </div>
             </div>
+
+            <p className="sm:hidden text-[10px] text-mute italic mb-1.5 flex items-center gap-1">
+              <span>← Swipe table horizontally to see all columns →</span>
+            </p>
 
             {/* Table */}
             <div className="table-wrap">

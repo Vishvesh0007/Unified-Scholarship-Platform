@@ -45,38 +45,13 @@ export default function DistrictDashboard() {
         </div>
       }
     >
-      {/* ═══ Top Tab Navigation Pills ═══ */}
-      <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-        {sidebarLinks.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as DistrictTab)}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
-              activeTab === tab.id
-                ? "bg-navy text-white shadow-xs"
-                : "bg-white border border-line text-mute hover:border-navy/30 hover:text-ink hover:bg-card-hover"
-            }`}
-          >
-            <tab.icon size={15} />
-            <span>{tab.label}</span>
-            {tab.badge && (
-              <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                activeTab === tab.id ? "bg-white/20 text-white" : "bg-bg-warm text-mute"
-              }`}>
-                {tab.badge}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
-
       {/* ═══════════════════════════════════════════════
           OVERVIEW TAB
           ═══════════════════════════════════════════════ */}
       {(activeTab === "overview" || activeTab === "analytics") && (
-        <div className="space-y-6 animate-fade-in">
+        <div className="space-y-5 sm:space-y-6 animate-fade-in">
           {/* Stats Row */}
-          <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
             <StatCard label="Total Applications" value={districtStats.totalApplications.toLocaleString()} icon={FileText} color="navy" trend={{ value: "+12.4% vs last mo", up: true }} />
             <StatCard label="District Verified" value={districtStats.verified.toLocaleString()} icon={CheckSquare} color="leaf" trend={{ value: "79.0% rate", up: true }} />
             <StatCard label="Pending at Tehsils" value={districtStats.pending.toLocaleString()} icon={AlertTriangle} color="saffron" />
@@ -84,77 +59,81 @@ export default function DistrictDashboard() {
           </div>
 
           {/* Charts Row */}
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
             {/* Coverage by District / Block */}
-            <div className="card p-6">
-              <div className="flex items-center justify-between mb-4">
+            <div className="card p-4 sm:p-6">
+              <div className="flex items-center justify-between gap-2 mb-4">
                 <div>
-                  <h3 className="font-bold text-base text-ink">Application Coverage by Tehsil Block</h3>
+                  <h3 className="font-bold text-sm sm:text-base text-ink">Application Coverage by Tehsil Block</h3>
                   <p className="text-xs text-mute mt-0.5">Applied vs. Verified vs. Disbursed counts</p>
                 </div>
-                <span className="badge badge-navy text-[10px]">Real-time Sync</span>
+                <span className="badge badge-navy text-[10px] shrink-0">Real-time Sync</span>
               </div>
-              <ResponsiveContainer width="100%" height={280}>
-                <BarChart data={coverageData} margin={{ top: 5, right: 10, left: -15, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" />
-                  <XAxis dataKey="district" tick={{ fontSize: 11, fill: "var(--mute)" }} />
-                  <YAxis tick={{ fontSize: 11, fill: "var(--mute)" }} />
-                  <Tooltip
-                    contentStyle={{
-                      background: "var(--card)",
-                      border: "1px solid var(--line)",
-                      borderRadius: "8px",
-                      fontSize: "12px",
-                    }}
-                  />
-                  <Bar dataKey="applied" fill="var(--navy)" radius={[4, 4, 0, 0]} name="Applied" />
-                  <Bar dataKey="verified" fill="var(--saffron)" radius={[4, 4, 0, 0]} name="Verified" />
-                  <Bar dataKey="disbursed" fill="var(--leaf)" radius={[4, 4, 0, 0]} name="Disbursed" />
-                </BarChart>
-              </ResponsiveContainer>
+              <div className="w-full h-[260px] sm:h-[280px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={coverageData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" />
+                    <XAxis dataKey="district" tick={{ fontSize: 10, fill: "var(--mute)" }} />
+                    <YAxis tick={{ fontSize: 10, fill: "var(--mute)" }} />
+                    <Tooltip
+                      contentStyle={{
+                        background: "var(--card)",
+                        border: "1px solid var(--line)",
+                        borderRadius: "8px",
+                        fontSize: "12px",
+                      }}
+                    />
+                    <Bar dataKey="applied" fill="var(--navy)" radius={[4, 4, 0, 0]} name="Applied" />
+                    <Bar dataKey="verified" fill="var(--saffron)" radius={[4, 4, 0, 0]} name="Verified" />
+                    <Bar dataKey="disbursed" fill="var(--leaf)" radius={[4, 4, 0, 0]} name="Disbursed" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
 
             {/* Scheme Distribution */}
-            <div className="card p-6">
+            <div className="card p-4 sm:p-6">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="font-bold text-base text-ink">Applications by Scheme Type</h3>
+                  <h3 className="font-bold text-sm sm:text-base text-ink">Applications by Scheme Type</h3>
                   <p className="text-xs text-mute mt-0.5">MoTA Central & State Tribal Welfare Schemes</p>
                 </div>
               </div>
-              <ResponsiveContainer width="100%" height={280}>
-                <PieChart>
-                  <Pie
-                    data={schemeWiseData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={95}
-                    innerRadius={50}
-                    paddingAngle={3}
-                  >
-                    {schemeWiseData.map((entry, i) => (
-                      <Cell key={entry.name} fill={PIE_COLORS[i % PIE_COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{
-                      background: "var(--card)",
-                      border: "1px solid var(--line)",
-                      borderRadius: "8px",
-                      fontSize: "12px",
-                    }}
-                    formatter={(value: number) => value.toLocaleString()}
-                  />
-                  <Legend
-                    verticalAlign="bottom"
-                    iconType="circle"
-                    iconSize={8}
-                    wrapperStyle={{ fontSize: "11px", paddingTop: "10px" }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+              <div className="w-full h-[260px] sm:h-[280px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={schemeWiseData}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="45%"
+                      outerRadius={75}
+                      innerRadius={42}
+                      paddingAngle={3}
+                    >
+                      {schemeWiseData.map((entry, i) => (
+                        <Cell key={entry.name} fill={PIE_COLORS[i % PIE_COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{
+                        background: "var(--card)",
+                        border: "1px solid var(--line)",
+                        borderRadius: "8px",
+                        fontSize: "12px",
+                      }}
+                      formatter={(value: number) => value.toLocaleString()}
+                    />
+                    <Legend
+                      verticalAlign="bottom"
+                      iconType="circle"
+                      iconSize={7}
+                      wrapperStyle={{ fontSize: "10px", paddingTop: "6px" }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </div>
@@ -166,24 +145,28 @@ export default function DistrictDashboard() {
       {(activeTab === "overview" || activeTab === "bottlenecks") && (
         <div className="space-y-4 animate-fade-in">
           <div className="card">
-            <div className="p-6 border-b border-line">
+            <div className="p-4 sm:p-6 border-b border-line">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="font-bold text-lg text-ink">Verification Bottlenecks & Delay Diagnostics</h3>
+                  <h3 className="font-bold text-base sm:text-lg text-ink">Verification Bottlenecks & Delay Diagnostics</h3>
                   <p className="text-xs text-mute mt-0.5">Identifies administrative stages where applications take longer than MoTA SLAs</p>
                 </div>
-                <span className="badge badge-saffron text-xs font-semibold">2 Critical Stages Detected</span>
+                <span className="badge badge-saffron text-xs font-semibold self-start sm:self-auto">2 Critical Stages Detected</span>
               </div>
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[600px] text-sm">
+            <p className="sm:hidden px-4 pt-3 text-[10px] text-mute italic flex items-center gap-1">
+              <span>← Swipe table horizontally to see all columns →</span>
+            </p>
+
+            <div className="table-wrap border-0 rounded-none">
+              <table className="w-full min-w-[550px] text-sm">
                 <thead className="bg-bg-warm border-b border-line">
                   <tr>
-                    <th className="text-left p-3.5 pl-6 text-xs font-bold text-mute uppercase tracking-wider">Processing Stage</th>
-                    <th className="text-left p-3.5 text-xs font-bold text-mute uppercase tracking-wider">Pending Apps</th>
-                    <th className="text-left p-3.5 text-xs font-bold text-mute uppercase tracking-wider">Avg Processing Delay</th>
-                    <th className="text-left p-3.5 pr-6 text-xs font-bold text-mute uppercase tracking-wider">Capacity Load</th>
+                    <th className="text-left p-3 sm:p-3.5 sm:pl-6 text-xs font-bold text-mute uppercase tracking-wider">Processing Stage</th>
+                    <th className="text-left p-3 sm:p-3.5 text-xs font-bold text-mute uppercase tracking-wider">Pending Apps</th>
+                    <th className="text-left p-3 sm:p-3.5 text-xs font-bold text-mute uppercase tracking-wider">Avg Delay</th>
+                    <th className="text-left p-3 sm:p-3.5 sm:pr-6 text-xs font-bold text-mute uppercase tracking-wider">Capacity Load</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -192,18 +175,18 @@ export default function DistrictDashboard() {
                     const pct = (b.pending / maxPending) * 100;
                     return (
                       <tr key={b.stage} className="border-t border-line-subtle hover:bg-bg-warm/60 transition-colors">
-                        <td className="p-3.5 pl-6 font-semibold text-ink">{b.stage}</td>
-                        <td className="p-3.5 font-bold font-mono">{b.pending.toLocaleString()}</td>
-                        <td className="p-3.5">
-                          <span className={`badge text-xs font-bold ${
+                        <td className="p-3 sm:p-3.5 sm:pl-6 font-semibold text-ink text-xs sm:text-sm">{b.stage}</td>
+                        <td className="p-3 sm:p-3.5 font-bold font-mono text-xs sm:text-sm">{b.pending.toLocaleString()}</td>
+                        <td className="p-3 sm:p-3.5">
+                          <span className={`badge text-[11px] sm:text-xs font-bold ${
                             b.avgDays > 10 ? "badge-danger" : b.avgDays > 5 ? "badge-saffron" : "badge-leaf"
                           }`}>
-                            {b.avgDays} days avg
+                            {b.avgDays}d avg
                           </span>
                         </td>
-                        <td className="p-3.5 pr-6 w-52">
-                          <div className="flex items-center gap-3">
-                            <div className="flex-1 h-2.5 rounded-full bg-line overflow-hidden">
+                        <td className="p-3 sm:p-3.5 sm:pr-6 w-40 sm:w-52">
+                          <div className="flex items-center gap-2 sm:gap-3">
+                            <div className="flex-1 h-2 sm:h-2.5 rounded-full bg-line overflow-hidden">
                               <div
                                 className={`h-full rounded-full transition-all ${
                                   b.avgDays > 10 ? "bg-danger" : b.avgDays > 5 ? "bg-saffron" : "bg-leaf"
@@ -211,7 +194,7 @@ export default function DistrictDashboard() {
                                 style={{ width: `${pct}%` }}
                               />
                             </div>
-                            <span className="text-xs font-mono text-mute w-8 text-right">{Math.round(pct)}%</span>
+                            <span className="text-[11px] sm:text-xs font-mono text-mute w-8 text-right">{Math.round(pct)}%</span>
                           </div>
                         </td>
                       </tr>
@@ -221,7 +204,7 @@ export default function DistrictDashboard() {
               </table>
             </div>
 
-            <div className="p-4 border-t border-line bg-bg-warm/40 text-xs text-mute flex justify-between items-center">
+            <div className="p-3.5 sm:p-4 border-t border-line bg-bg-warm/40 text-xs text-mute flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
               <span>Automatic escalations are dispatched when delays exceed 14 calendar days</span>
               <button className="text-navy font-semibold hover:underline">Issue Fast-Track Order →</button>
             </div>
@@ -236,12 +219,12 @@ export default function DistrictDashboard() {
         <div className="space-y-4 animate-fade-in">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="font-bold text-lg text-ink">Tribal Area Coverage Rates</h3>
+              <h3 className="font-bold text-base sm:text-lg text-ink">Tribal Area Coverage Rates</h3>
               <p className="text-xs text-mute">Percentage of census-eligible ST youth currently receiving DBT scholarship</p>
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-6">
             {coverageData.map(c => (
               <SpotlightCard key={c.district} className="p-4 text-center flex flex-col justify-between">
                 <div>

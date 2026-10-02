@@ -82,49 +82,49 @@ const techStack = [
 
 export default function Home() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col w-full min-w-0">
       {/* ═══ Hero ═══ */}
-      <header className="relative hero-gradient min-h-[85vh] flex items-center overflow-hidden px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <header className="relative hero-gradient min-h-[80vh] sm:min-h-[85vh] flex items-center overflow-hidden px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">
         <Beams />
         <div className="relative container-main w-full">
           <div className="max-w-3xl">
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2 mb-4 sm:mb-6 flex-wrap">
               <span className="badge badge-navy">Smart India Hackathon 2026</span>
               <span className="badge badge-saffron">Team Vecood</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-[1.08] tracking-tight">
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.08] tracking-tight">
               One profile.
               <br />
               <span className="gradient-text">Every scholarship.</span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-base sm:text-lg text-mute leading-relaxed">
+            <p className="mt-4 sm:mt-6 max-w-xl text-sm sm:text-base md:text-lg text-mute leading-relaxed">
               A unified platform that sits above existing government systems — NSP, MoTA, DigiLocker, DBT/PFMS — 
               giving every tribal student a seamless, barrier-free journey from discovery to disbursement.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/student" className="btn btn-primary px-7 py-3.5 text-base font-semibold shadow-md">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <Link href="/student" className="btn btn-primary px-6 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base font-semibold shadow-md justify-center">
                 Open Student Portal
                 <ArrowRight size={18} />
               </Link>
-              <Link href="#portals" className="btn btn-outline px-6 py-3.5 text-base">
+              <Link href="#portals" className="btn btn-outline px-5 sm:px-6 py-3 sm:py-3.5 text-sm sm:text-base justify-center">
                 Explore All Portals
               </Link>
             </div>
 
             {/* Stats strip */}
-            <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-line pt-8">
+            <div className="mt-8 sm:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 border-t border-line pt-6 sm:pt-8">
               {[
                 { value: "4.2M+", label: "Eligible Students" },
                 { value: "24+", label: "Schemes Connected" },
                 { value: "28", label: "States Covered" },
                 { value: "₹8,420Cr", label: "Potential Disbursement" },
               ].map((s) => (
-                <div key={s.label}>
-                  <p className="text-2xl sm:text-3xl font-extrabold text-ink">{s.value}</p>
-                  <p className="text-xs text-mute mt-1 font-medium">{s.label}</p>
+                <div key={s.label} className="p-2 sm:p-0">
+                  <p className="text-xl sm:text-2xl md:text-3xl font-extrabold text-ink">{s.value}</p>
+                  <p className="text-[11px] sm:text-xs text-mute mt-0.5 sm:mt-1 font-medium">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -137,34 +137,34 @@ export default function Home() {
       {/* ═══ Choose Portal ═══ */}
       <section className="section bg-white" id="portals">
         <div className="container-main">
-          <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-            <span className="badge badge-navy mb-3">Multi-Stakeholder Architecture</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">Choose your portal</h2>
-            <p className="mt-4 text-mute text-base">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
+            <span className="badge badge-navy mb-2 sm:mb-3">Multi-Stakeholder Architecture</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">Choose your portal</h2>
+            <p className="mt-3 sm:mt-4 text-mute text-sm sm:text-base">
               Four specialized portals designed for each key stakeholder in the tribal scholarship ecosystem.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {roles.map((role) => {
               const c = colorClasses[role.color];
               return (
                 <Link key={role.title} href={role.href} className="block h-full group focus:outline-none">
-                  <SpotlightCard className="h-full p-6 flex flex-col justify-between transition-all duration-300 group-hover:border-navy/30 group-hover:shadow-md">
+                  <SpotlightCard className="h-full p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 group-hover:border-navy/30 group-hover:shadow-md">
                     <div className="flex-1 flex flex-col">
-                      <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${c.bg} mb-5 group-hover:scale-105 transition-transform`}>
-                        <role.icon size={24} className={c.text} />
+                      <div className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl ${c.bg} mb-4 sm:mb-5 group-hover:scale-105 transition-transform`}>
+                        <role.icon size={22} className={c.text} />
                       </div>
-                      <div className="flex items-center gap-2 mb-1.5">
+                      <div className="flex items-center gap-2 mb-1">
                         <span className="text-[10px] font-bold uppercase tracking-wider text-mute">{role.subtitle}</span>
                       </div>
-                      <h3 className="text-xl font-bold text-ink">{role.title}</h3>
-                      <p className="mt-3 text-sm text-mute leading-relaxed">{role.desc}</p>
+                      <h3 className="text-lg sm:text-xl font-bold text-ink">{role.title}</h3>
+                      <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-mute leading-relaxed">{role.desc}</p>
                     </div>
 
-                    <div className={`mt-6 pt-4 border-t border-line-subtle flex items-center justify-between text-sm font-semibold ${c.text}`}>
+                    <div className={`mt-5 sm:mt-6 pt-3.5 sm:pt-4 border-t border-line-subtle flex items-center justify-between text-xs sm:text-sm font-semibold ${c.text}`}>
                       <span>{role.cta}</span>
-                      <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                   </SpotlightCard>
                 </Link>
@@ -177,34 +177,40 @@ export default function Home() {
       {/* ═══ How It Works ═══ */}
       <section className="section bg-bg" id="how-it-works">
         <div className="container-main">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="badge badge-saffron mb-3">Student Journey</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
+            <span className="badge badge-saffron mb-2 sm:mb-3">Student Journey</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
               Onboard → Discover → Apply → Verify → Receive
             </h2>
-            <p className="mt-4 text-mute">
+            <p className="mt-3 sm:mt-4 text-mute text-sm sm:text-base">
               Five clear steps from initial profile setup to scholarship funds deposited in your account.
             </p>
           </div>
 
           <div className="relative">
-            {/* Connection line positioned exactly through the vertical center of the icon boxes */}
+            {/* Desktop horizontal connection line */}
             <div className="hidden md:block absolute top-7 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-navy via-saffron to-leaf opacity-30 z-0" />
 
-            <div className="grid gap-6 md:grid-cols-5 relative z-10">
+            <div className="grid gap-3 sm:gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-5 relative z-10">
               {howItWorks.map((step, i) => (
-                <div key={step.step} className="relative text-center animate-fade-in-up" style={{ animationDelay: `${i * 120}ms` }}>
+                <div
+                  key={step.step}
+                  className="card md:card-none p-4 sm:p-5 md:p-0 md:bg-transparent md:border-0 md:shadow-none relative text-left md:text-center flex md:flex-col items-center md:items-center gap-4 md:gap-0 animate-fade-in-up"
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
                   {/* Icon wrapper with securely anchored badge */}
-                  <div className="relative inline-flex items-center justify-center mb-5">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white border-2 border-line shadow-xs relative z-10">
-                      <step.icon size={24} className="text-navy" />
+                  <div className="relative inline-flex items-center justify-center md:mb-4 shrink-0">
+                    <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-white border-2 border-line shadow-xs relative z-10">
+                      <step.icon size={22} className="text-navy" />
                     </div>
-                    <div className="absolute -top-1.5 -right-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-saffron text-white text-[11px] font-bold z-20 shadow-xs border-2 border-white">
+                    <div className="absolute -top-1 -right-1 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-saffron text-white text-[10px] sm:text-[11px] font-bold z-20 shadow-xs border-2 border-white">
                       {step.step}
                     </div>
                   </div>
-                  <h3 className="text-base font-bold text-ink">{step.title}</h3>
-                  <p className="mt-2 text-xs sm:text-sm text-mute leading-relaxed">{step.desc}</p>
+                  <div className="min-w-0 flex-1 md:flex-initial">
+                    <h3 className="text-sm sm:text-base font-bold text-ink">{step.title}</h3>
+                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-mute leading-relaxed">{step.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -267,10 +273,10 @@ export default function Home() {
             </div>
 
             {/* Tech Stack Cards */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {techStack.map((t) => (
-                <SpotlightCard key={t.title} className="p-5" >
-                  <t.icon size={22} className="text-navy mb-3" />
+                <SpotlightCard key={t.title} className="p-4 sm:p-5" >
+                  <t.icon size={22} className="text-navy mb-2.5 sm:mb-3" />
                   <h4 className="text-sm font-bold text-ink">{t.title}</h4>
                   <p className="text-xs text-mute mt-1.5 leading-relaxed">{t.desc}</p>
                 </SpotlightCard>
@@ -282,11 +288,11 @@ export default function Home() {
 
       {/* ═══ Connected Systems (Marquee) ═══ */}
       <section className="section bg-white" id="schemes">
-        <div className="container-main mb-8">
+        <div className="container-main mb-6 sm:mb-8">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="badge badge-saffron mb-3">Seamless Integrations</span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">Connected to existing systems</h2>
-            <p className="mt-3 text-mute text-sm sm:text-base">
+            <span className="badge badge-saffron mb-2 sm:mb-3">Seamless Integrations</span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">Connected to existing systems</h2>
+            <p className="mt-2.5 sm:mt-3 text-mute text-xs sm:text-base">
               Interoperable with National Scholarship Portal, Ministry of Tribal Affairs, DigiLocker, and PFMS.
             </p>
           </div>
@@ -295,23 +301,23 @@ export default function Home() {
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="relative overflow-hidden bg-navy text-white py-20 px-4 sm:px-6">
+      <section className="relative overflow-hidden bg-navy text-white py-14 sm:py-20 px-4 sm:px-6">
         <div className="absolute inset-0 opacity-10">
           <Beams />
         </div>
         <div className="relative container-main text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
             Ready to experience the unified journey?
           </h2>
-          <p className="mt-4 text-white/80 max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
+          <p className="mt-3 sm:mt-4 text-white/80 max-w-lg mx-auto text-xs sm:text-base leading-relaxed">
             Create your profile once, get matched automatically to eligible scholarships, and track your DBT payment step by step.
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/student" className="btn btn-saffron px-8 py-3.5 text-base font-semibold shadow-md">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3">
+            <Link href="/student" className="btn btn-saffron px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold shadow-md justify-center">
               Open Student Portal
               <ArrowRight size={18} />
             </Link>
-            <Link href="#portals" className="btn px-7 py-3.5 text-base border border-white/30 text-white hover:bg-white/10 transition-colors">
+            <Link href="#portals" className="btn px-6 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base border border-white/30 text-white hover:bg-white/10 transition-colors justify-center">
               View Stakeholder Portals
             </Link>
           </div>
@@ -320,8 +326,8 @@ export default function Home() {
 
       {/* ═══ Public Marketing Footer ═══ */}
       <footer className="border-t border-line bg-white">
-        <div className="container-main py-12 sm:py-16">
-          <div className="grid gap-10 md:grid-cols-4">
+        <div className="container-main py-10 sm:py-16">
+          <div className="grid gap-8 sm:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             {/* Brand column */}
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">

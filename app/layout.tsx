@@ -12,11 +12,16 @@ export const metadata: Metadata = {
   keywords: ["scholarship", "tribal students", "NSP", "MoTA", "DigiLocker", "DBT", "SIH", "unified platform", "Team Vecood"],
 };
 
-export const viewport: Viewport = { themeColor: "#1a365d" };
+export const viewport: Viewport = {
+  themeColor: "#1a365d",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -25,9 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-bg antialiased">
+      <body className="min-h-screen flex flex-col bg-bg antialiased overflow-x-hidden w-full selection:bg-navy/10 selection:text-navy">
         <Nav />
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col w-full min-w-0">
           {children}
         </div>
         <Jago />
